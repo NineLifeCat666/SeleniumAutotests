@@ -35,14 +35,26 @@ public class DemoQaTests extends BaseTest {
         currentAddress.sendKeys("Groove street");
         WebElement permanentAddress = chromeDriver.findElement(By.id("permanentAddress"));
         permanentAddress.sendKeys("Groove street 69 state");
-
     }
 
     @Test
     public void mainPageTestWithPO() {
     chromeDriver.get("https://demoqa.com");
     DemoQaMainPage demoQaMainPage = new DemoQaMainPage(chromeDriver);
-    demoQaMainPage.clickOnElements();
+    Assertions.assertTrue(demoQaMainPage.showElements().contains("Elements"), "Блок Элементы не содержит текст - Elements");
+    Assertions.assertTrue(demoQaMainPage.showForms().contains("Forms"), "Блок Форма не содержит текст - Forms");
+    Assertions.assertTrue(demoQaMainPage.showAlertsAndWindows().contains("Alerts, Frame & Windows"), "Блок Алерты не содержит текст - Alerts, Frame & Windows");
+    Assertions.assertTrue(demoQaMainPage.showWidgets().contains("Widgets"), "Блок Виджеты не содержит текст - Widgets");
+    Assertions.assertTrue(demoQaMainPage.showInteractions().contains("Interactions"), "Блок Интеракшн не содержит текст - Interactions");
+    Assertions.assertTrue(demoQaMainPage.showBookApp().contains("Book Store Application"), "Блок Букс не содержит текст - Book Store Application");
+
     }
 
+    @Test
+    public void textBoxPageTest() {
+        chromeDriver.get("https://demoqa.com/text-box");
+        DemoQaTextBoxPage demoQaTextBoxPage = new DemoQaTextBoxPage(chromeDriver);
+        demoQaTextBoxPage.fillTextBoxForm("Eugene", "mahanada@yandex.ru",
+                "Groove street", "Sheesh street");
+    }
 }
