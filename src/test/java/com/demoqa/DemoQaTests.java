@@ -1,10 +1,13 @@
 package com.demoqa;
 
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 
 public class DemoQaTests extends BaseTest {
 
@@ -57,4 +60,15 @@ public class DemoQaTests extends BaseTest {
         demoQaTextBoxPage.fillTextBoxForm("Eugene", "mahanada@yandex.ru",
                 "Groove street", "Sheesh street");
     }
+
+    @Feature("Текстовая форма")
+    @DisplayName("Тест на заполнение TextBox")
+    @Test
+    public void textBoxTest() {
+    chromeDriver.get("https://demoqa.com/text-box");
+    DemoQaPageFactory demoQaPageFactory = PageFactory.initElements(chromeDriver, DemoQaPageFactory.class);
+    demoQaPageFactory.fillTextBox("pupa and","lupa@gmail.com","gets","zalupa");
+    demoQaPageFactory.showOutputResult();
+    }
+
 }
