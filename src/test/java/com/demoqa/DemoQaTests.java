@@ -105,14 +105,14 @@ public class DemoQaTests extends BaseTest {
     }
 
     @Test
-    @Feature("Чек бокс")
+    @Feature("CheckBox")
     @DisplayName("Проверка работы чек бокса - выбор всех элементов")
     public void checkBoxAllElementsTest() {
         chromeDriver.get("https://demoqa.com/checkbox");
         DemoQaPageFactory demoQaPageFactory = PageFactory.initElements(chromeDriver, DemoQaPageFactory.class);
         Assertions.assertTrue(demoQaPageFactory.mainHeaderCheckBox.getText().contains("Check Box"), "Главный хидер страницы не содержит слова - Check Box");
         demoQaPageFactory.homeCheckBox.click();
-        demoQaPageFactory.resultCheckBox.getText().contains("You have selected :\n" +
+        Assertions.assertTrue(demoQaPageFactory.resultCheckBox.getText().contains("You have selected :\n" +
                 "home\n" +
                 "desktop\n" +
                 "notes\n" +
@@ -129,7 +129,43 @@ public class DemoQaTests extends BaseTest {
                 "general\n" +
                 "downloads\n" +
                 "wordFile\n" +
-                "excelFile");
+                "excelFile"), "Выбраннsе названия чек боксов не содержатся в итоговом результате выбранных чек боксов");
+    }
+
+    @Test
+    @Feature("CheckBox")
+    @DisplayName("Проверка кнопки expand - раскрытие всех эелементов дерева")
+    public void checkBoxExpandTest() {
+        chromeDriver.get("https://demoqa.com/checkbox");
+        DemoQaPageFactory demoQaPageFactory = PageFactory.initElements(chromeDriver, DemoQaPageFactory.class);
+        demoQaPageFactory.expandAllCheckBox();
+        Assertions.assertTrue(demoQaPageFactory.treeNode.getText().contains("Home\n" +
+                "Desktop\n" +
+                "Notes\n" +
+                "Commands\n" +
+                "Documents\n" +
+                "WorkSpace\n" +
+                "React\n" +
+                "Angular\n" +
+                "Veu\n" +
+                "Office\n" +
+                "Public\n" +
+                "Private\n" +
+                "Classified\n" +
+                "General\n" +
+                "Downloads\n" +
+                "Word File.doc\n" +
+                "Excel File.doc"), "Дерево эелментов чек боксов не содержит перечисленные наименования");
+    }
+
+    @Test
+    @Feature("CheckBox")
+    @DisplayName("Проверка кнопки collapse - закрытие всех элементов чек боксов")
+    public void collapseCheckBoxTest() {
+        chromeDriver.get("https://demoqa.com/checkbox");
+        DemoQaPageFactory demoQaPageFactory = PageFactory.initElements(chromeDriver, DemoQaPageFactory.class);
+        demoQaPageFactory.collapseAllCheckBox();
+        Assertions.assertTrue(demoQaPageFactory.treeNode.getText().endsWith("Home"), "При всех свернутых чек боксах результат не содержит наименование - Home");
     }
 
 

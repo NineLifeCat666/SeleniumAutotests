@@ -1,13 +1,11 @@
 package com.demoqa;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import com.codeborne.selenide.*;
+
 
 
 
@@ -57,6 +55,9 @@ public class DemoQaPageFactory {
 
     @FindBy(how = How.ID, id = "tree-node")
     WebElement treeNode;
+
+    @FindBy(how = How.XPATH, xpath = "//button[@title='Toggle']")
+    WebElement toggleButton;
 
     public void fillTextBox(String name, String email, String curAddress, String perAddress) {
         fullName.click();
