@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import com.codeborne.selenide.*;
 
 
 
@@ -24,7 +25,7 @@ public class DemoQaPageFactory {
     }
 
     //Почему он всегда null?
-    JavascriptExecutor js = (JavascriptExecutor) chromeDriver;
+//    JavascriptExecutor js = (JavascriptExecutor) chromeDriver;
 
 
     @FindBy(how = How.ID, id = "userName")
@@ -41,6 +42,21 @@ public class DemoQaPageFactory {
     WebElement submitButton;
     @FindBy(how = How.ID, id = "output")
     WebElement outputResult;
+    @FindBy(how = How.XPATH, xpath = "//div[@class='main-header' and text()='Check Box']")
+    WebElement mainHeaderCheckBox;
+    @FindBy(how = How.XPATH, xpath = "//span[@class='rct-checkbox' and //span[text()='Home']]")
+    WebElement homeCheckBox;
+
+    @FindBy(how = How.ID, id = "result")
+    WebElement resultCheckBox;
+    @FindBy(how = How.XPATH, xpath = "//button[@title='Expand all']")
+    WebElement expandAllCheckBox;
+
+    @FindBy(how = How.XPATH, xpath = "//button[@title='Collapse all']")
+    WebElement collapseAllCheckBox;
+
+    @FindBy(how = How.ID, id = "tree-node")
+    WebElement treeNode;
 
     public void fillTextBox(String name, String email, String curAddress, String perAddress) {
         fullName.click();
@@ -62,13 +78,24 @@ public class DemoQaPageFactory {
 //                .scrollByAmount(0, deltaY)
 //                .perform();
 //        js.executeScript("arguments[0].scrollIntoView();", outputResult);
-        Actions actions = new Actions(chromeDriver);
-        actions.sendKeys(Keys.ARROW_DOWN).perform();
+//        Actions actions = new Actions(chromeDriver);
+//        actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //hahahah
+        submitButton.sendKeys(Keys.ARROW_DOWN);
+        submitButton.sendKeys(Keys.ARROW_DOWN);
+        submitButton.sendKeys(Keys.ARROW_DOWN);
         String outputResultText = outputResult.getText();
         System.out.println(outputResultText);
         return outputResultText;
     }
 
+    public void expandAllCheckBox() {
+        expandAllCheckBox.click();
+    }
+
+    public void collapseAllCheckBox() {
+        collapseAllCheckBox.click();
+    }
 
 
 }
